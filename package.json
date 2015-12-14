@@ -1,7 +1,7 @@
 {
   "name": "blockr",
   "version": "0.1.0",
-  "description": "Array manipulation tool similar to Array.map/.reduce, but for several elements at once.",
+  "description": "Block-based array manipulation.",
   "main": "blockr.js",
   "scripts": {
     "test": "node test/test.js"
