@@ -1,6 +1,6 @@
 # blockr
 
-Blockr is a (Typed)Array manipulation tool that works similar to `Array.map` and `Array.reduce`, but for several elements at once. Written for image processing purposes.
+Blockr is a (Typed)Array block-based manipulation tool that works similar to `Array.map` and `Array.reduce`, but for several elements at once. Written for image processing purposes.
 
 ```bash
 $ npm install blockr
