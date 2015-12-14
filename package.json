@@ -1,0 +1,14 @@
+{
+  "name": "blockr",
+  "version": "0.1.0",
+  "description": "Array manipulation tool similar to Array.map/.reduce, but for several elements at once.",
+  "main": "blockr.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "author": "Mateo Gianolio",
+  "license": "MIT",
+  "dependencies": {
+    "pngjs": "^2.2.0"
+  }
+}
