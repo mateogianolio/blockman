@@ -11,12 +11,12 @@ $ npm test
 
 #### `map = (data, f)`
 
-Like `Array.map()`, but iterates over blocks of **`data`**. The block size is inferred from the arguments supplied to the mapping function.
+Like `Array.map()`, but iterates over blocks of **`data`**. The block size is inferred from the arguments supplied to the mapping function. The mapping function should always return an array.
 
 ```javascript
 var data = [1, 2, 3, 4, 5, 6];
 
-blockr.map(data, (x) => x + 2);
+blockr.map(data, (x) => [x + 2]);
 // [3, 4, 5, 6, 7, 8]
 
 blockr.map(data, (x, y) => [y, x]);
@@ -28,7 +28,7 @@ blockr.map(data, (x, y, z) => [z, y, x]);
 
 #### `expand = (data, f)`
 
-Expand blocks of **`data`**. The block size is inferred from the arguments supplied to the expanding function.
+Expand blocks of **`data`**. The block size is inferred from the arguments supplied to the expanding function. The expanding function should always return an array.
 
 ```javascript
 var data = [1, 2, 3, 4, 5, 6];
@@ -45,7 +45,7 @@ blockr.expand(data, (x, y, z) => [x, y, z, x * y * z]);
 
 #### `reduce = (data, f)`
 
-Reduce blocks of **`data`**. The block size is inferred from the arguments supplied to the reduction function.
+Reduce blocks of **`data`**. The block size is inferred from the arguments supplied to the reduction function. The reduction function should always return a `Number`.
 
 ```javascript
 var data = [1, 2, 3, 4, 5, 6];
