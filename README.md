@@ -11,7 +11,7 @@ $ npm test
 
 #### `map = (data, f)`
 
-Like `Array.map()`, but iterates over blocks of **`data`**. The block size is inferred from the arguments supplied to the mapping function. The mapping function should always return an array.
+Like `Array.map()`, but iterates over blocks of **`data`**. The block size is inferred from the number of arguments supplied to the mapping function. The mapping function should always return an array.
 
 ```javascript
 var data = [1, 2, 3, 4, 5, 6];
@@ -28,11 +28,9 @@ blockr.map(data, (x, y, z) => [z, y, x]);
 
 #### `expand = (data, f)`
 
-Expand blocks of **`data`**. The block size is inferred from the arguments supplied to the expanding function. The expanding function should always return an array.
+Expand blocks of **`data`**. The block size is inferred from the number of arguments supplied to the expanding function. The expanding function should always return an array.
 
 ```javascript
-var data = [1, 2, 3, 4, 5, 6];
-
 blockr.expand([0], (x) => [x - 1, x, x + 1]);
 // [-1, 0, 1]
 
@@ -45,11 +43,9 @@ blockr.expand(data, (x, y, z) => [x, y, z, x * y * z]);
 
 #### `reduce = (data, f)`
 
-Reduce blocks of **`data`**. The block size is inferred from the arguments supplied to the reduction function. The reduction function should always return a `Number`.
+Reduce blocks of **`data`**. The block size is inferred from the number of arguments supplied to the reduction function. The reduction function should always return a `Number`.
 
 ```javascript
-var data = [1, 2, 3, 4, 5, 6];
-
 blockr.reduce(data, (x, y) => x + y);
 // [3, 7, 11]
 
@@ -92,12 +88,14 @@ f64Gray = blockr.expand(
   ]
 );
 
+// 5. Create object to pass to PNG.sync.write
 image = {
   width: image.width,
   height: image.height,
   data: new Uint8ClampedArray(f64Gray)
 };
 
+// 5. Write new image to file
 fs.writeFileSync('./test/test.gray.png', PNG.sync.write(image));
 console.log('wrote to ./test/test.gray.png');
 console.log('---');
