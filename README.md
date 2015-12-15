@@ -7,25 +7,57 @@ $ npm install blockr
 $ npm test
 ```
 
-### Usage
+### API
+
+#### `map = (data, f)`
+
+Like `Array.map()`, but iterates over blocks of **`data`**. The block size is inferred from the arguments supplied to the mapping function.
 
 ```javascript
-var blockr = require('blockr');
+var data = [1, 2, 3, 4, 5, 6];
 
-data = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+blockr.map(data, (x) => x + 2);
+// [3, 4, 5, 6, 7, 8]
 
-// you can use it to rearrange
-data = blockr.map(data, (a, b, c) => [c, b, a]);
-// [ 3, 2, 1, 6, 5, 4, 9, 8, 7 ]
+blockr.map(data, (x, y) => [y, x]);
+// [2, 1, 4, 3, 6, 5]
 
-// reduce with 3-tuple
-data = blockr.reduce(data, (a, b, c) => (a + b + c));
-// [ 6, 15, 24 ]
-
-// expand each element into 3 elements
-data = blockr.expand(data, (x) => [x, x + 1, x + 2]);
-// [ 6, 7, 8, 15, 16, 17, 24, 25, 26 ]
+blockr.map(data, (x, y, z) => [z, y, x]);
+// [3, 2, 1, 6, 5, 4]
 ```
+
+#### `expand = (data, f)`
+
+Expand blocks of **`data`**. The block size is inferred from the arguments supplied to the expanding function.
+
+```javascript
+var data = [1, 2, 3, 4, 5, 6];
+
+blockr.expand([0], (x) => [x - 1, x, x + 1]);
+// [-1, 0, 1]
+
+blockr.expand(data, (x, y) => [x, y, x + y]);
+// [1, 2, 3, 3, 4, 7, 5, 6, 11]
+
+blockr.expand(data, (x, y, z) => [x, y, z, x * y * z]);
+// [1, 2, 3, 6, 4, 5, 6, 120]
+```
+
+#### `reduce = (data, f)`
+
+Reduce blocks of **`data`**. The block size is inferred from the arguments supplied to the reduction function.
+
+```javascript
+var data = [1, 2, 3, 4, 5, 6];
+
+blockr.reduce(data, (x, y) => x + y);
+// [3, 7, 11]
+
+blockr.reduce(data, (x, y, z) => x * y + z);
+// [5, 26]
+```
+
+### Usage
 
 You can for example use it to easily reduce an RGBA image into a double precision [grayscale](https://en.wikipedia.org/wiki/Grayscale) bitmap array (each pixel a value from `0` to `1`) and then expand it back into an RBGA array:
 

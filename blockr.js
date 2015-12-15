@@ -31,12 +31,12 @@
       if (length % size !== 0)
         throw new Error('Array length must be divisible by iterator argument count.');
 
-      length *= step / size;
-      var result = new constructor(length);
-      for (var i = 0; i < length; i += step) {
-        block = f(...data.slice(i / (step / size)));
+      var result = new constructor(length * (step / size));
+      for (var i = 0; i < length; i += size) {
+        block = data.slice(i, i + step);
+        block = f(...block);
         for (var j = 0; j < step; j++)
-          result[i + j] = block[j];
+          result[i * (step / size) + j] = block[j];
       }
 
       return result;

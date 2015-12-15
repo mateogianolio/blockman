@@ -2,9 +2,10 @@
   'use strict';
 
   var fs = require('fs'),
-      png = require('pngjs').PNG;
+      PNG = require('pngjs').PNG,
+      blockr = require('../blockr');
 
-  var image = png.sync.read(fs.readFileSync('./test/test.png')),
+  var image = PNG.sync.read(fs.readFileSync('./test/test.png')),
       imageData = new Float64Array(image.data);
 
   var grayscale = blockr.reduce(
@@ -20,7 +21,7 @@
     )
   );
 
-  fs.writeFileSync('./test/test.gray.png', png.sync.write({
+  fs.writeFileSync('./test/test.gray.png', PNG.sync.write({
     width: image.width,
     height: image.height,
     data: back
