@@ -5,28 +5,36 @@
       PNG = require('pngjs').PNG,
       blockr = require('../blockr');
 
-  var image = PNG.sync.read(fs.readFileSync('./test/test.png')),
-      imageData = new Float64Array(image.data);
+  // 1. Read image into a node Buffer
+  var image = PNG.sync.read(fs.readFileSync('./test/test.png'));
 
-  var grayscale = blockr.reduce(
-    imageData,
+  // 2. Create a Float64Array view of the image data buffer
+  var f64 = new Float64Array(image.data);
+
+  // Reduce every 4 elements (R, G, B and alpha respectively).
+  // Resulting array will be 1/4 the size of the original.
+  var f64Gray = blockr.reduce(f64,
     (r, g, b, a) =>
-      0.2126 * (r / 255) + 0.7152 * (g / 255) + 0.0722 * (b / 255)
+      0.2126 * (r / 255) +
+      0.7152 * (g / 255) +
+      0.0722 * (b / 255)
   );
 
-  var back = new Uint8ClampedArray(
+  // 4. Expand the image back to its original size
+  var u8Gray = new Uint8ClampedArray(
     blockr.expand(
-      grayscale,
+      f64Gray,
       x => [x * 255, x * 255, x * 255, 255]
     )
   );
 
-  fs.writeFileSync('./test/test.gray.png', PNG.sync.write({
+  image = {
     width: image.width,
     height: image.height,
-    data: back
-  }));
+    data: u8Gray
+  };
 
-  console.log();
-  console.log('grayscale image saved to test/test.gray.png');
+  fs.writeFileSync('./test/test.gray.png', PNG.sync.write(image));
+  console.log('wrote to ./test/test.gray.png');
+  console.log('---');
 }());
