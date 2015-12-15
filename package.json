@@ -1,14 +1,26 @@
 {
   "name": "blockr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Block-based array manipulation.",
   "main": "blockr.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "pngjs": "^2.2.0"
+  },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js && node test/grayscale.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateogianolio/blockr.git"
   },
   "author": "Mateo Gianolio",
   "license": "MIT",
-  "dependencies": {
-    "pngjs": "^2.2.0"
-  }
+  "bugs": {
+    "url": "https://github.com/mateogianolio/blockr/issues"
+  },
+  "homepage": "https://github.com/mateogianolio/blockr#readme"
 }
