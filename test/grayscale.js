@@ -3,7 +3,7 @@
 
   var fs = require('fs'),
       PNG = require('pngjs').PNG,
-      blockr = require('../blockr');
+      bm = require('../blockman');
 
   // 1. Read image into a node Buffer
   var image = PNG.sync.read(fs.readFileSync('./test/test.png'));
@@ -13,7 +13,7 @@
 
   // Reduce every 4 elements (R, G, B and alpha respectively).
   // Resulting array will be 1/4 the size of the original.
-  var f64Gray = blockr.reduce(f64,
+  var f64Gray = bm.reduce(f64,
     (r, g, b, a) =>
       0.2126 * (r / 255) +
       0.7152 * (g / 255) +
@@ -21,7 +21,7 @@
   );
 
   // 4. Expand the image back to its original size
-  f64Gray = blockr.expand(
+  f64Gray = bm.expand(
     f64Gray,
     x => [
       x * 255,
@@ -31,12 +31,8 @@
     ]
   );
 
-  // 5. Create object to pass to PNG.sync.write
-  image = {
-    width: image.width,
-    height: image.height,
-    data: new Uint8ClampedArray(f64Gray)
-  };
+  // 5. Replace image data
+  image.data = new Uint8ClampedArray(f64Gray);
 
   // 6. Write new image to file
   fs.writeFileSync('./test/test.gray.png', PNG.sync.write(image));

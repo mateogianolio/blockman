@@ -89,14 +89,10 @@ f64Gray = bm.expand(
   ]
 );
 
-// 5. Create object to pass to PNG.sync.write
-image = {
-  width: image.width,
-  height: image.height,
-  data: new Uint8ClampedArray(f64Gray)
-};
+// 5. Replace image data
+image.data = new Uint8ClampedArray(f64Gray);
 
-// 5. Write new image to file
+// 6. Write new image to file
 fs.writeFileSync('./test/test.gray.png', PNG.sync.write(image));
 console.log('wrote to ./test/test.gray.png');
 console.log('---');
