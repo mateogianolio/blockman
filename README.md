@@ -82,17 +82,20 @@ var f64Gray = blockr.reduce(f64,
 );
 
 // 4. Expand the image back to its original size
-var u8Gray = new Uint8ClampedArray(
-  blockr.expand(
-    f64Gray,
-    x => [x * 255, x * 255, x * 255, 255]
-  )
+f64Gray = blockr.expand(
+  f64Gray,
+  x => [
+    x * 255,
+    x * 255,
+    x * 255,
+    255
+  ]
 );
 
 image = {
   width: image.width,
   height: image.height,
-  data: u8Gray
+  data: new Uint8ClampedArray(f64Gray)
 };
 
 fs.writeFileSync('./test/test.gray.png', PNG.sync.write(image));
