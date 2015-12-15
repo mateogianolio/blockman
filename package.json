@@ -1,8 +1,8 @@
 {
-  "name": "blockr",
+  "name": "blockman",
   "version": "0.1.4",
   "description": "Block-based array manipulation.",
-  "main": "blockr.js",
+  "main": "blockman.js",
   "directories": {
     "test": "test"
   },
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mateogianolio/blockr.git"
+    "url": "git+https://github.com/mateogianolio/blockman.git"
   },
   "author": "Mateo Gianolio",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mateogianolio/blockr/issues"
+    "url": "https://github.com/mateogianolio/blockman/issues"
   },
-  "homepage": "https://github.com/mateogianolio/blockr#readme"
+  "homepage": "https://github.com/mateogianolio/blockman#readme"
 }
